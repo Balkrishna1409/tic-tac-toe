@@ -7,10 +7,18 @@ function App() {
   const [isX ,setIsX]=useState(false);
   const setvalue = (index)=>
   {
-    let str=Array.from(currentState);
-    str[index]=(isX ? 'X':'O');
-    setCurrentState(str);
-    setIsX(!isX);
+    if(!currentState[index])
+    {
+      let str=Array.from(currentState);
+      str[index]=(isX ? 'X':'O');
+      setCurrentState(str);
+      setIsX(!isX);
+    }
+    else
+    {
+      alert('this field is already filled');
+    }
+   
   }
   useEffect(
     ()=>
@@ -59,12 +67,18 @@ function App() {
     }
     return null;
   }
+
+  
   return (
     <div className="tic-tac-toe">
       <div className="heading">
       <h1>Tic Tac Toe Game</h1>
+      <div className="player">
+        <h1>Player's Turn: <span>{isX? 'X':'O'}</span></h1>
+        {console.log(isX)}
       </div>
-     
+      </div>
+      
        <div className="tic-tac-toe-box">
       <div className="item  border-top border-left" id='0' onClick={()=>setvalue(0)}>{currentState[0]}</div>
       <div className="item border-top" id='1' onClick={()=>setvalue(1)}>{currentState[1]}</div>
